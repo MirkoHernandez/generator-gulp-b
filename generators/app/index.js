@@ -11,12 +11,12 @@ module.exports = class extends Generator {
     );
 
     const prompts = [
-      {
-        type: 'confirm',
-        name: 'someAnswer',
-        message: 'Would you like to enable this option?',
-        default: true
-      }
+      // {
+        // type: 'confirm',
+        // name: 'someAnswer',
+        // message: 'Would you like to enable this option?',
+        // default: true
+      // }
     ];
 
     return this.prompt(prompts).then(props => {
@@ -27,12 +27,12 @@ module.exports = class extends Generator {
 
   writing() {
     this.fs.copy(
-      this.templatePath('dummyfile.txt'),
-      this.destinationPath('dummyfile.txt')
+      this.templatePath('gulpfile.js'),
+      this.destinationPath('gulpfile.js')
     );
   }
 
-  install() {
-    this.installDependencies();
-  }
+  // install() {
+    // this.installDependencies();
+  // }
 };
