@@ -1,11 +1,18 @@
 'use strict';
 
-// Node 
+// Plugins
 var del = require('del');
 
 // Gulp plugins
 var gulp = require('gulp');
 var sass = require('gulp-sass');
+
+// Gulp config
+var watchOptions = {
+    usePolling: true, // required when using inside VMs.
+}
+// Plugin config
+
 
 // Paths
 var paths = {
@@ -15,6 +22,7 @@ var paths = {
     },
 };
 
+// Tasks
 gulp.task('default', function () {
-    
 });
+
