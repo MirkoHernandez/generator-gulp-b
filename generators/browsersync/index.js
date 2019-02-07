@@ -16,41 +16,46 @@ module.exports = class extends Generator {
 	contents = contents.replace(replaceString,replaceString + newContent);
 
 	// Update path
-	replaceString= "var paths = {"
-	newContent = "\n browsersync: {\n dest: './dist'\n},\n";
+	replaceString= "var paths = {\n"
+	newContent = "browsersync: {\n dest: './dist'\n},\n";
 	contents = contents.replace(replaceString,replaceString + newContent);
 
 	// Update tasks
-	replaceString= "// Tasks"
+	replaceString= "// Tasks\n"
 	newContent = "function browsersync () {" +
-	    "\n browserSync.init({\n" +
-	    "server: {\n"  +
-	    "baseDir: path.browserSync.dest\n" +
-	    "}," + 
-	    "open:fase \n"
+	    "\n  browserSync.init({\n" +
+	    "    server: {\n"  +
+	    "      baseDir: path.browserSync.dest\n" +
+	    "    },\n" + 
+	    "open:false \n" +
 	"});\n";
 	
 	contents = contents.replace(replaceString,replaceString + newContent);
-	
 	
 	this.fs.write('gulpfile.js',contents);
 
 	// Update package.json
 	var jsonContent = this.fs.readJSON('package.json')
-	if( jsonContent && !jsonContent['devDependencies']){
-	    jsonContent['devDependencies'] = {};
-	}
+	if (jsonContent) {
+	    if (jsonContent && !jsonContent['devDependencies']) {
+		jsonContent['devDependencies'] = {};
+	    }
 	
-	if( jsonContent['devDependencies'] ){
-	    if(! jsonContent['devDependencies']['browser-sync']){
-		jsonContent['devDependencies']['browser-sync'] = '*';
-		console.log(jsonContent);
-		this.fs.writeJSON('package.json', jsonContent);
+	    if (jsonContent['devDependencies'] ){
+		if(! jsonContent['devDependencies']['browser-sync']) {
+		    jsonContent['devDependencies']['browser-sync'] = '*';
+		    console.log(jsonContent);
+		    this.fs.writeJSON('package.json', jsonContent);
+		}
 	    }
 	}
     }
 
-  // install() {
-    // this.installDependencies();
-  // }
+     install() {
+      this.installDependencies({
+	  yarn: true,
+	  npm: false,
+	  bower: false,
+      });
+  }
 };
