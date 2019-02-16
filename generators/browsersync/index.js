@@ -5,14 +5,13 @@ const yosay = require('yosay');
 
 module.exports = class extends Generator {
  
-
     writing() {
 	// Update gulpfile
 	var contents = this.fs.read('gulpfile.js');
 
 	// Update require
-	var replaceString = "// Plugins"
-	var newContent = "\n var browserSync = require('browser-sync').create()\n";
+	var replaceString = "// Plugins\n"
+	var newContent = "var browserSync = require('browser-sync').create()\n";
 	contents = contents.replace(replaceString,replaceString + newContent);
 
 	// Update path
@@ -22,13 +21,15 @@ module.exports = class extends Generator {
 
 	// Update tasks
 	replaceString= "// Tasks\n"
-	newContent = "function browsersync () {" +
-	    "\n  browserSync.init({\n" +
-	    "    server: {\n"  +
-	    "      baseDir: path.browserSync.dest\n" +
-	    "    },\n" + 
-	    "open:false \n" +
-	"})\n};";
+	newContent = "function browsersync () {\n" +
+	    "    browserSync.init({\n" +
+	    "        server: {\n"  +
+	    "            baseDir: path.browserSync.dest\n" +
+	    "        },\n" + 
+	    "        open:false \n" +
+	    "    });\n" + 
+	    "}\n" +
+	    "exports.browsersync = browsersync;";
 	
 	contents = contents.replace(replaceString,replaceString + newContent);
 	
