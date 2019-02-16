@@ -1,5 +1,5 @@
 # generator-gulp-b 
-> A generator that creates a gulpfile. It also enables easy customization using subgenrators.
+> A generator that creates a gulpfile. It also enables easy customization using subgenerators.
 
 ## Installation
 
@@ -27,6 +27,12 @@ with a task that by defaul watches the dist folder.
 
 ```bash
 yo gulp-b:browsersync
+```
+
+Usage: 
+
+```bash
+npx gulp browsersync
 ```
 
 ## License
