@@ -29,11 +29,26 @@ with a task that by defaul watches the dist folder.
 yo gulp-b:browsersync
 ```
 
-Usage: 
+Using the browsersync task:
 
 ```bash
 npx gulp browsersync
 ```
+
+### Sass
+
+A subgenerator that installs a task to compile sass.
+
+```bash
+yo gulp-b:sass
+```
+
+Using the browsersync task:
+
+```bash
+npx gulp sass
+```
+
 
 ## License
 
