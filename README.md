@@ -17,7 +17,6 @@ yo gulp-b .
 
 This will update the package.json file to include gulp
 
-
 ## Subgenerators
 
 ### Browsersync
@@ -49,6 +48,26 @@ Using the browsersync task:
 npx gulp sass
 ```
 
+### Rollup
+
+A subgenerator that installs a task that runs rollup configured from a
+config file.  By default the modules for bundling must be configured
+in src/main-rollup.js.
+
+Using the rollup task:
+
+```bash
+npx gulp rollup
+```
+
+Postcss is also configured in the rollup config file so it is possible
+import and bundle css files (by default scss is used). 
+
+Example:
+
+```bash
+import '../scss/main.scss';
+```
 
 ## License
 
