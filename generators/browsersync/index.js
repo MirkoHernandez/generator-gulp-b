@@ -28,7 +28,7 @@ module.exports = class extends Generator {
 	    "      baseDir: path.browserSync.dest\n" +
 	    "    },\n" + 
 	    "open:false \n" +
-	"});\n";
+	"})\n};";
 	
 	contents = contents.replace(replaceString,replaceString + newContent);
 	
@@ -37,12 +37,12 @@ module.exports = class extends Generator {
 	// Update package.json
 	var jsonContent = this.fs.readJSON('package.json')
 	if (jsonContent) {
-	    if (jsonContent && !jsonContent['devDependencies']) {
+	    if (!jsonContent['devDependencies']) {
 		jsonContent['devDependencies'] = {};
 	    }
 	
-	    if (jsonContent['devDependencies'] ){
-		if(! jsonContent['devDependencies']['browser-sync']) {
+	    if (jsonContent['devDependencies']) {
+		if(!jsonContent['devDependencies']['browser-sync']) {
 		    jsonContent['devDependencies']['browser-sync'] = '*';
 		    console.log(jsonContent);
 		    this.fs.writeJSON('package.json', jsonContent);
