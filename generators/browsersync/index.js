@@ -45,7 +45,6 @@ module.exports = class extends Generator {
 	    if (jsonContent['devDependencies']) {
 		if(!jsonContent['devDependencies']['browser-sync']) {
 		    jsonContent['devDependencies']['browser-sync'] = '*';
-		    console.log(jsonContent);
 		    this.fs.writeJSON('package.json', jsonContent);
 		}
 	    }

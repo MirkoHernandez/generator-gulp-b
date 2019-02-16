@@ -45,7 +45,6 @@ module.exports = class extends Generator {
 	    if (jsonContent['devDependencies']) {
 		if(!jsonContent['devDependencies']['gulp-sass']) {
 		    jsonContent['devDependencies']['gulp-sass'] = '*';
-		    console.log(jsonContent);
 		    this.fs.writeJSON('package.json', jsonContent);
 		}
 	    }
