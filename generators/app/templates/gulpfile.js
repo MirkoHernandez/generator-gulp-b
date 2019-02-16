@@ -1,11 +1,9 @@
 'use strict';
 
 // Plugins
-var del = require('del');
 
 // Gulp plugins
 var gulp = require('gulp');
-var sass = require('gulp-sass');
 
 // Gulp config
 var watchOptions = {
