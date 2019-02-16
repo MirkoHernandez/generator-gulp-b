@@ -4,6 +4,7 @@
 
 // Gulp plugins
 var gulp = require('gulp');
+var taskListing = require('gulp-task-listing');
 
 // Gulp config
 var watchOptions = {
@@ -21,6 +22,5 @@ var paths = {
 };
 
 // Tasks
-gulp.task('default', function () {
-});
+gulp.task('default', taskListing);
 
