@@ -24,12 +24,12 @@ module.exports = class extends Generator {
 	newContent = "function browsersync () {\n" +
 	    "    browserSync.init({\n" +
 	    "        server: {\n"  +
-	    "            baseDir: path.browserSync.dest\n" +
+	    "            baseDir: paths.browsersync.dest\n" +
 	    "        },\n" + 
 	    "        open:false \n" +
 	    "    });\n" + 
 	    "}\n" +
-	    "exports.browsersync = browsersync;";
+	    "exports.browsersync = browsersync;\n";
 	
 	contents = contents.replace(replaceString,replaceString + newContent);
 	

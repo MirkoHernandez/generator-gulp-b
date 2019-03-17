@@ -11,7 +11,7 @@ module.exports = class extends Generator {
 
 	// Update require
 	var replaceString = "// Plugins\n"
-	var newContent = "var sass= require('gulp-sass').create()\n";
+	var newContent = "var sass= require('gulp-sass');\n";
 	contents = contents.replace(replaceString,replaceString + newContent);
 
 	// Update path
