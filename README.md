@@ -15,14 +15,14 @@ Then go to the folder in which you want to generate a gulpfile and run the gener
 yo gulp-b .
 ```
 
-This will update the package.json file to include gulp
+This will update the package.json file to include gulp.
 
 ## Subgenerators
 
 ### Browsersync
 
 A subgenerator that installs browsersync and configures the gulpfile
-with a task that by defaul watches the dist folder.
+with a task that by default watches the dist folder.
 
 ```bash
 yo gulp-b:browsersync
@@ -42,7 +42,7 @@ A subgenerator that installs a task to compile sass.
 yo gulp-b:sass
 ```
 
-Using the browsersync task:
+Using the sass task:
 
 ```bash
 npx gulp sass
@@ -61,7 +61,7 @@ npx gulp rollup
 ```
 
 Postcss is also configured in the rollup config file so it is possible
-import and bundle css files (by default scss is used). 
+import and bundle css files (by default the scss extension is used). 
 
 Example:
 
