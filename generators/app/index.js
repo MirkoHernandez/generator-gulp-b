@@ -30,9 +30,32 @@ module.exports = class extends Generator {
       this.templatePath('gulpfile.js'),
       this.destinationPath('gulpfile.js')
     );
+
+      var jsonContent = this.fs.readJSON('package.json')
+      if (jsonContent) {
+	  if (!jsonContent['devDependencies']) {
+	      jsonContent['devDependencies'] = {};
+	  }
+	    
+	  if (jsonContent['devDependencies']) {
+	      if(!jsonContent['devDependencies']['gulp']) {
+		  jsonContent['devDependencies']['gulp'] = '*';
+		  this.fs.writeJSON('package.json', jsonContent);
+	      }
+	  }
+      } else {
+	  this.fs.copy(
+	      this.templatePath('package.json'),
+	      this.destinationPath('package.json')
+	  );
+      }
   }
 
-  // install() {
-    // this.installDependencies();
-  // }
+    install() {
+	this.installDependencies({
+	    yarn: true,
+	    npm: false,
+	    bower: false,
+	});
+  }
 };
