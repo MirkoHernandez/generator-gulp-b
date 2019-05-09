@@ -1,0 +1,42 @@
+Description:
+    Creates a gulpfile (and a package.json file if required).
+
+Example:
+    yo gulp-b
+
+    This will create:
+        gulpfile.js
+	package.json (if there is no package.json file)
+
+    yo gulp-b:sass
+
+    This will update:
+        gulpfile.js with a sass task to compile scss files.
+	package.json to include gulp-sass
+
+    yo gulp-b:browsersync
+
+    This will update;
+        gulpfile.js with a browsersync task to watch files and reload the browser.
+	package.json to include browser-sync.
+
+    yo gulp-b:rollup
+
+    This will create:
+        rollup.config.js
+
+    This will update:
+        gulpfile.js with a rollup task to
+
+	package.json to include the following packages:
+  	    vinyl-source-stream
+	    vinyl-buffer
+	    rollup-plugin-node-resolve
+	    rollup-plugin-commonjs
+	    rollup-stream 
+	    rollup-plugin-postcss
+
+
+	    
+
+
