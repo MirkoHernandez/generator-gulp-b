@@ -65,7 +65,7 @@ import and bundle css files (by default the scss extension is used).
 
 Example:
 
-```bash
+```javascript
 import '../scss/main.scss';
 ```
 
