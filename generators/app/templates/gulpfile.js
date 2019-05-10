@@ -4,7 +4,7 @@
 
 // Gulp plugins
 var gulp = require('gulp');
-var taskListing = require('gulp-task-listing');
+var usage = require('gulp-help-doc');
 
 // Gulp config
 var watchOptions = {
@@ -22,5 +22,16 @@ var paths = {
 };
 
 // Tasks
-gulp.task('default', taskListing);
+
+/**
+ * Tasks  can be  documented by  writing a  comment like  this and  by
+ * marking the task with @task  {task-name}. Optionally @order {1} can
+ * be used to specify in which order the tasks should be  listed.
+ */
+function help () {
+    return usage(gulp);
+}
+
+exports.help = help;
+gulp.task('default', help);
 

@@ -12,6 +12,7 @@
   },
   "devDependencies": {
     "gulp": "*",
-    "gulp-task-listing":"*"
+    "gulp-task-listing":"*",
+    "gulp-help-doc":"*"
   }
 }
