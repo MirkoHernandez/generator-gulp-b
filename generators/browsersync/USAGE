@@ -1,0 +1,11 @@
+Description:
+    Updates the gulpfile to include a browser-sync task.
+
+Example:
+
+    yo gulp-b:browsersync
+
+    This will update;
+        gulpfile.js with a browsersync task to watch files and reload the browser.
+	package.json to include browser-sync.
+

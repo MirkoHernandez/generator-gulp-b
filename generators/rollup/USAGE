@@ -1,0 +1,22 @@
+Description:
+	Creates a rollup config file and updates the gulpfile to include a rollup task.
+
+Example:
+    yo gulp-b:rollup
+
+    This will create:
+        rollup.config.js
+
+    This will update:
+        gulpfile.js with a rollup task to
+
+	package.json to include the following packages:
+  	    vinyl-source-stream
+	    vinyl-buffer
+	    rollup-plugin-node-resolve
+	    rollup-plugin-commonjs
+	    rollup-stream 
+	    rollup-plugin-postcss
+
+
+	    
