@@ -2,38 +2,37 @@
 const Generator = require('yeoman-generator');
 const chalk = require('chalk');
 const yosay = require('yosay');
+const esprimaHelpers = require('../esprima-helpers.js');
 
 module.exports = class extends Generator {
-
     writing() {
       	// Update gulpfile
 	var contents = this.fs.read('gulpfile.js');
 
 	// Update require
-	var replaceString = "// Plugins\n"
 	var newContent = "var sass= require('gulp-sass');\n";
-	contents = contents.replace(replaceString,replaceString + newContent);
+	
+	contents = esprimaHelpers.insertAfterComment(contents,'Plugins', newContent)
 
 	// Update path
-	replaceString= "var paths = {\n"
-	newContent = "styles: {\n" +
-	    "src: './design/scss/**/*.scss',\n" +
-	    "dest: './dist/css/'\n},\n";
-	contents = contents.replace(replaceString,replaceString + newContent);
+	newContent = `tmpProperties = {styles: { \
+	    src: './design/scss/**/*.scss' \
+	    dest: './dist/css/'} \
+        }`;
+
+	contents = esprimaHelpers.addProperty(contents,'paths', newContent);
 
 	// Update tasks
-	replaceString= "// Tasks\n"
-	newContent = "function styles() {\n" +
-	    "    return gulp.src(paths.styles.src)\n" +
-	    "        .pipe(sass())\n"  +
-	    "        .pipe(gulp.dest(paths.styles.dest))\n" +
-	    "}\n" +
-	    "exports.styles = styles;\n\n";
-	
-	contents = contents.replace(replaceString,replaceString + newContent);
+	newContent =`function styles() {
+    return gulp.src(paths.styles.src)
+        .pipe(sass())
+        .pipe(gulp.dest(paths.styles.dest))
+    }
+exports.styles = styles;`;
+
+	contents = esprimaHelpers.insertAfterComment(contents,'Tasks', newContent)
 	
 	this.fs.write('gulpfile.js',contents);
-
 	
 	// Update package.json
 	var jsonContent = this.fs.readJSON('package.json')
