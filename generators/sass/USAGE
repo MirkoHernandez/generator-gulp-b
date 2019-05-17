@@ -1,0 +1,10 @@
+Description:
+   Updates the gulpfile with a task that compiles scss files.
+
+Example:
+
+    yo gulp-b:sass
+
+    This will update:
+        gulpfile.js 
+	package.json to include gulp-sass
