@@ -2,41 +2,26 @@
 const Generator = require('yeoman-generator');
 const chalk = require('chalk');
 const yosay = require('yosay');
+const esprimaHelpers = require('../esprima-helpers.js');
 
 module.exports = class extends Generator {
  
     writing() {
+	// Write template
+	this.fs.copy(
+	    this.templatePath('gulptask-browsersync.js'),
+	    this.destinationPath('./gulpfile.js/gulptask-browsersync.js')
+	);
+	
 	// Update gulpfile
-	var contents = this.fs.read('gulpfile.js');
+	let contents = this.fs.read('./gulpfile.js/index.js');
+	const newCode = "require('./gulptask-browsersync');\n";
+	contents = esprimaHelpers.addCodeToBeginningOfProgram(contents,newCode);
 
-	// Update require
-	var replaceString = "// Plugins\n"
-	var newContent = "var browserSync = require('browser-sync').create()\n";
-	contents = contents.replace(replaceString,replaceString + newContent);
-
-	// Update path
-	replaceString= "var paths = {\n"
-	newContent = "browsersync: {\n dest: './dist'\n},\n";
-	contents = contents.replace(replaceString,replaceString + newContent);
-
-	// Update tasks
-	replaceString= "// Tasks\n"
-	newContent = "function browsersync () {\n" +
-	    "    browserSync.init({\n" +
-	    "        server: {\n"  +
-	    "            baseDir: paths.browsersync.dest\n" +
-	    "        },\n" + 
-	    "        open:false \n" +
-	    "    });\n" + 
-	    "}\n" +
-	    "exports.browsersync = browsersync;\n";
-	
-	contents = contents.replace(replaceString,replaceString + newContent);
-	
-	this.fs.write('gulpfile.js',contents);
+	this.fs.write('./gulpfile.js/index.js',contents);
 
 	// Update package.json
-	var jsonContent = this.fs.readJSON('package.json')
+	let jsonContent = this.fs.readJSON('package.json')
 	if (jsonContent) {
 	    if (!jsonContent['devDependencies']) {
 		jsonContent['devDependencies'] = {};

@@ -7,5 +7,6 @@ Example:
 
     This will update;
         gulpfile.js with a browsersync task to watch files and reload the browser.
-	package.json to include browser-sync.
+	package.json to include:
+	  - browser-sync.
 
