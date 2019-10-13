@@ -1,0 +1,11 @@
+Description:
+   Updates the gulpfile with fractal tasks.
+
+Example:
+
+    yo gulp-b:fractal
+
+    This will update:
+        gulpfile.js 
+	package.json to include:
+	  - @frctl/fractal
