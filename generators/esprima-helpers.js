@@ -9,7 +9,7 @@ var escodegen = require('escodegen');
  */
 function nodeAddProperty(node, properties) {
     let currentProperties = null;
-    var newTree = esprima.parseScript(properties,{tolerant:true});
+    let newTree = esprima.parseScript(properties,{tolerant:true});
     estraverse.traverse(newTree, {
 	enter: function (node,parent) {
 	    if (node.type === 'AssignmentExpression') {
@@ -29,6 +29,28 @@ function commentFound(node, commentString) {
     return node.type == 'LineComment' && node.value.trim() === commentString.trim();
 }
 
+
+function addNodeToBeginningOfProgram(ast,newNode) {
+    ast.body = newNode.body.concat(ast.body); 
+}
+
+function displayNodes(ast) {
+    estraverse.traverse(ast, {
+	enter: function (node,parent) {
+	    console.log(JSON.stringify(node, null, 4));
+	}
+    });
+}
+
+exports.addCodeToBeginningOfProgram = function (source, newCode) { 
+    let ast = esprima.parseScript(source,  {range: true, tokens: true, comment: true, loc: true});
+    let newNode =  esprima.parseScript(newCode,{range: true, tokens: true, comment: true, loc: true});
+    ast.body = newNode.body.concat(ast.body); 
+    return escodegen.generate(ast);;
+}
+
+
+
 /**
  * @param {string} source - source code of the program.
  * @param {string} comment - comment after which to insert the new code. 
@@ -44,12 +66,12 @@ exports.insertAfterComment = function (source,comment,newCode) {
 	    endLine = meta.end.offset;
 	}
     });
+    
     let newAst = esprima.parseScript(newCode,{tolerant:true});
     newNode =  escodegen.generate(newAst,{});
     source = source.slice(0, endLine) + '\n' + newNode+  source.slice(endLine);
     return source;
 }
-
 
 /**
  * @param {string} source - source code of the program.
@@ -77,6 +99,3 @@ exports.addProperty = function (source,variable,properties) {
     }
     return escodegen.generate(ast, escodegenOptions);
 }
-
-
-
