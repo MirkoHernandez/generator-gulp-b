@@ -7,4 +7,6 @@ Example:
 
     This will update:
         gulpfile.js 
-	package.json to include gulp-sass
+	package.json to include:
+	  - gulp-sass
+	  - gulp-sass-glob

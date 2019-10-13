@@ -6,36 +6,22 @@ const esprimaHelpers = require('../esprima-helpers.js');
 
 module.exports = class extends Generator {
     writing() {
+	// Write template
+	this.fs.copy(
+	    this.templatePath('gulptask-sass.js'),
+	    this.destinationPath('./gulpfile.js/gulptask-sass.js')
+	);
+	
       	// Update gulpfile
-	var contents = this.fs.read('gulpfile.js');
+	let contents = this.fs.read('./gulpfile.js/index.js');
+	const newCode = "require('./gulptask-sass');\n";
+	contents = esprimaHelpers.addCodeToBeginningOfProgram(contents,newCode);
 
-	// Update require
-	var newContent = "var sass= require('gulp-sass');\n";
-	
-	contents = esprimaHelpers.insertAfterComment(contents,'Plugins', newContent)
+	this.log(contents);
+	this.fs.write('./gulpfile.js/index.js',contents);
 
-	// Update path
-	newContent = `tmpProperties = {styles: { \
-	    src: './design/scss/**/*.scss' \
-	    dest: './dist/css/'} \
-        }`;
-
-	contents = esprimaHelpers.addProperty(contents,'paths', newContent);
-
-	// Update tasks
-	newContent =`function styles() {
-    return gulp.src(paths.styles.src)
-        .pipe(sass())
-        .pipe(gulp.dest(paths.styles.dest))
-    }
-exports.styles = styles;`;
-
-	contents = esprimaHelpers.insertAfterComment(contents,'Tasks', newContent)
-	
-	this.fs.write('gulpfile.js',contents);
-	
 	// Update package.json
-	var jsonContent = this.fs.readJSON('package.json')
+	let  jsonContent = this.fs.readJSON('package.json')
 	if (jsonContent) {
 	    if (!jsonContent['devDependencies']) {
 		jsonContent['devDependencies'] = {};
@@ -44,6 +30,10 @@ exports.styles = styles;`;
 	    if (jsonContent['devDependencies']) {
 		if(!jsonContent['devDependencies']['gulp-sass']) {
 		    jsonContent['devDependencies']['gulp-sass'] = '*';
+		    this.fs.writeJSON('package.json', jsonContent);
+		}
+		if(!jsonContent['devDependencies']['gulp-sass-glob']) {
+		    jsonContent['devDependencies']['gulp-sass-glob'] = '*';
 		    this.fs.writeJSON('package.json', jsonContent);
 		}
 	    }
