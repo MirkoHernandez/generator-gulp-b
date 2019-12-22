@@ -7,9 +7,15 @@ config.watchOptions  = {
 const stylesDir='design';
 
 config.paths = {
+    dest: './dist',
+    rollup: {
+	src: './src/main.js'
+    },
+    elm: {
+	src: './src/**/*.elm'
+    },
     server: {
-	src: './src',
-	dest: './dist',
+	src: './src'
     },
     styles: {
 	src: `${stylesDir}/scss/**/*.scss`,
