@@ -1,0 +1,20 @@
+Description:
+	Creates a gulptask file form elm tasks..
+
+Example:
+    yo gulp-b:elm
+
+    This will create:
+        gulptask-elm.js  in gulpfile.js/ folder.
+
+    This will update:
+        index.js with al elm task that compile elm code.
+
+    Packages:
+        rollup-plugin-node-resolve
+        rollup-plugin-commonjs
+        rollup-stream 
+        rollup-plugin-postcss
+
+
+	    
