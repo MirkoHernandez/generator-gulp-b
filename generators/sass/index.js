@@ -17,7 +17,6 @@ module.exports = class extends Generator {
 	const newCode = "require('./gulptask-sass');\n";
 	contents = esprimaHelpers.addCodeToBeginningOfProgram(contents,newCode);
 
-	this.log(contents);
 	this.fs.write('./gulpfile.js/index.js',contents);
 
 	// Update package.json
