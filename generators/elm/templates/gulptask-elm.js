@@ -11,6 +11,7 @@ function elmCompile() {
 /**
  * Compile elm files.
  * 
+ * @group {Building tasks}
  * @task {elm}
  */
 gulp.task('elm' , elmCompile);

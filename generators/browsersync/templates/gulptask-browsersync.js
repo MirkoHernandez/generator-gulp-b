@@ -24,6 +24,7 @@ const server = gulp.series(serve, watch);
 /**
  * Start a browsersync server.
  * 
+ * @group {Continuous Development}
  * @task {browsersync}
  */
 gulp.task('browsersync',server);

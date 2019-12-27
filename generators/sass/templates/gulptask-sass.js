@@ -15,6 +15,7 @@ const watch = () => gulp.watch(config.paths.styles.src, config.watchOptions,styl
 /**
  * Compile SCSS files.
  * 
+ * @group {Building tasks}
  * @task {styles}
  */
 gulp.task('styles' , styles);
@@ -22,6 +23,7 @@ gulp.task('styles' , styles);
 /**
  * Watch SCSS files for changes.
  * 
+ * @group {Continuous Development}
  * @task {styles:watch}
  */
 gulp.task('styles:watch' ,watch);
