@@ -41,6 +41,7 @@ const server = gulp.series(serve, watch);
 /**
  * Start a fractal server 
  * 
+ * @group {Continuous Development}
  * @task {fractal}
  */
 gulp.task('fractal' , server);
@@ -49,6 +50,7 @@ gulp.task('fractal' , server);
 /**
  * Build the fractal project.
  * 
+ * @group {Building tasks}
  * @task {fractal:build}
  */
 gulp.task('fractal:build' , build);

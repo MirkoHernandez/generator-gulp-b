@@ -38,6 +38,7 @@ function rollupBundle () {
 /**
  * Bundles js modules using rollup.
  * 
+ * @group {Building tasks}
  * @task {rollup:bundle}
  */
 gulp.task('rollup:bundle' ,rollupBundle);
