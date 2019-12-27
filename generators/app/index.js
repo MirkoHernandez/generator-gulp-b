@@ -4,29 +4,34 @@ const chalk = require('chalk');
 const yosay = require('yosay');
 
 module.exports = class extends Generator {
+
+  initializing() {
+      this.argument('tasks', {required: false, type: Array});
+    }
+
   prompting() {
-      this.log(
-	  yosay(`Welcome to the rad ${chalk.red('generator-gulp-b')} generator!`)
-      );
 
       const prompts = [
 	  {
               type: 'checkbox',
-              name: 'taskFiles',
+              name: 'tasks',
               message: 'Which tasks should be included?',
 	      choices: [
 		  'sass',
 		  'browsersync',
-		  'fractal'
+		  'fractal',
+		  'rollup',
+		  'elm'
 	      ],
               default: []
 	  }
       ];
-
-      return this.prompt(prompts).then(props => {
-	  // To access props later use this.props.someAnswer;
-	  this.props = props;
-      });
+      if (!this.options['tasks']) {
+	  return this.prompt(prompts).then(props => {
+	      // To access props later use this.props.someAnswer;
+	      this.props = props;
+	  });
+      }
   }
 
     writing() {
@@ -43,16 +48,16 @@ module.exports = class extends Generator {
 	    this.destinationPath('gulpfile.js/config.js')
 	);
 
-	this.props.taskFiles.forEach( f => {
-	    console.log('Installing: ', f);
+	if (this.options['tasks']) {
+	    this.props = {};
+	    this.props.tasks = this.options['tasks'];
+	}
+	
+	this.props.tasks.forEach( f => {
+	    this.log('Installing: ', f);
 	    this.composeWith('gulp-b:' + f);
 	});
 	
-      // this.props.
-      // this.composeWith('gulp-b:' )
-
-
-      
 
       var jsonContent = this.fs.readJSON('package.json')
       if (jsonContent) {
@@ -74,11 +79,4 @@ module.exports = class extends Generator {
       }
   }
 
-    install() {
-	// this.installDependencies({
-	    // yarn: true,
-	    // npm: false,
-	    // bower: false,
-	// });
-  }
 };
